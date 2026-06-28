@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+    <h2>Upload an Image</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if image_data %}
+        <h3>Uploaded Image</h3>
+        <img src="{{ image_data.path }}" width="300">
+
+        <h4>Image Metadata</h4>
+        <ul>
+            <li>Filename: {{ image_data.filename }}</li>
+            <li>Format: {{ image_data.format }}</li>
+            <li>Width: {{ image_data.width }}</li>
+            <li>Height: {{ image_data.height }}</li>
+        </ul>
+    {% endif %}
+
+    {% if ai_description %}
+        <h3>AI Description (Gemini)</h3>
+        <p>{{ ai_description }}</p>
+    {% endif %}
+    </div>
+</body>
+</html>
